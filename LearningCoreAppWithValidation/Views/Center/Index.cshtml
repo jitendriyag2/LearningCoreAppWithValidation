@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LearningCoreAppWithValidation.ViewModels.AddCenterVM>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table>
+        @foreach (var center in Model)
+        {
+        <tr>
+            <td>@center.Id</td>
+            <td>@center.Name</td>
+            <td>@center.CenterType.Name</td>
+            <td>@center.IsActive</td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>
