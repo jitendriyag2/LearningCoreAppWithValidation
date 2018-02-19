@@ -34,12 +34,9 @@
                 @Html.DisplayFor(modelItem => item.CenterType)
             </td>
             <td>
-                <button asp-action="Edit">Edit</button>
-                <button asp-action="Details">View Details</button>
-                <button asp-action="Delete">Delete</button>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" >View Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Would you like to delete this Item');">Delete</a>
             </td>
         </tr>
 }

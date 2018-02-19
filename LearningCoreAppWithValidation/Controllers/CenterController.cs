@@ -31,6 +31,7 @@ namespace LearningCoreAppWithValidation.Controllers
             {
                 viewCenters.Add(new CenterList()
                 {
+                    Id= center.Id,
                     Name = center.Name,
                     CenterType = (center.CenterType is null) ? null : center.CenterType.Name,
                     CenterRefId = center.CenterRefId,
@@ -83,9 +84,104 @@ namespace LearningCoreAppWithValidation.Controllers
         {
            if(ModelState.IsValid)
             {
-                return RedirectToAction("Create",ModelState);
+                Center center = new Center()
+                {
+                    Name = model.Name,
+                    CenterRefId = model.CenterRefID,
+                    CenterTypeId = model.SelectedCenterType,
+                    IsActive = model.IsActive
+                };
+
+                _dbContext.Centers.Add(center);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
             }
             return View("Create",ModelState);
         }
+
+        public IActionResult Edit(int Id)
+        {
+
+            List<CenterType> centerTypes = _dbContext.CenterTypes.ToList();
+            List<Models.CenterType> cTypes = new List<Models.CenterType>();
+
+            foreach (var centertype in centerTypes)
+            {
+                cTypes.Add(new Models.CenterType()
+                {
+                    Name = centertype.Name,
+                    Id = centertype.Id,
+                    IsActive = centertype.IsActive
+                });
+            }
+
+            List<Center> ParentCenters = _dbContext.Centers.Where(x => x.IsActive == true && x.Id != Id).ToList();
+            List<Models.Center> centers = new List<Models.Center>();
+
+            foreach (var pcenter in ParentCenters)
+            {
+                centers.Add(new Models.Center()
+                {
+                    Name = pcenter.Name,
+                    Id = pcenter.Id
+                });
+            }
+
+            Center center = _dbContext.Centers.Find(Id);
+
+
+            EditCenterVM editCenterVM = new EditCenterVM()
+            {
+                CenterRefID = center.CenterRefId,
+                Id = center.Id,
+                Name = center.Name,
+                SelectedCenterType = center.CenterTypeId,
+                IsActive = center.IsActive,
+                CenterTypes = cTypes,
+                ParentCenters = centers
+            };
+
+            return View(editCenterVM);
+        }
+        [HttpPost]
+        public IActionResult Edit(EditCenterVM model)
+        {
+
+            Center center = _dbContext.Centers.Find(model.Id);
+
+            center.CenterRefId = model.CenterRefID;
+            center.Id = model.Id;
+            center.Name = model.Name;
+            center.CenterTypeId = model.SelectedCenterType;
+            center.IsActive = model.IsActive;
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int Id)
+        {
+            Center center = _dbContext.Centers.Find(Id);
+            _dbContext.Centers.Remove(center);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(int Id)
+        {
+            Center center = _dbContext.Centers.Find(Id);
+            CenterDetailVM editCenterVM = new CenterDetailVM()
+            {
+                Id = center.Id,
+                Name = center.Name,
+                IsActive = center.IsActive,
+                ParentCenter = (_dbContext.Centers.Find(center.CenterRefId) == null) ? null: _dbContext.Centers.Find(center.CenterRefId).Name,
+                CenterType = _dbContext.CenterTypes.Find(center.CenterTypeId).Name
+            };
+            return View(editCenterVM);
+        }
+
     }
 }

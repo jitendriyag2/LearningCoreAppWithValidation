@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LearningCoreAppWithValidation.ViewModels
 {
-    public class AddCenterVM : ModelEntity
+    public class EditCenterVM : ModelEntity
     {
         //[Required,MinLength(2)]
         [Display(Name = "Center ID")]

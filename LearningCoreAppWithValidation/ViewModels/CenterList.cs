@@ -8,7 +8,7 @@ namespace LearningCoreAppWithValidation.ViewModels
 {
     public class CenterList
     {
-
+        public int Id { get; set; }
         public String Name { get; set; }
         public string CenterType { get; set; }
         public int CenterTypeId { get; set; }
