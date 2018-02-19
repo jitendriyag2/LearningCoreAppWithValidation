@@ -4,12 +4,32 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="Data\TempSeed.cs" />
+    <Compile Remove="Repositories\BaseDbContext.cs" />
+    <Compile Remove="Repositories\BaseRepository.cs" />
+    <Compile Remove="Repositories\CenterRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />

@@ -1,5 +1,5 @@
 ﻿using LearningCoreAppWithValidation.DBEntitities;
-using LearningCoreAppWithValidation.Repositories;
+//using LearningCoreAppWithValidation.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,19 +8,21 @@ using System.Threading.Tasks;
 
 namespace LearningCoreAppWithValidation.Data
 {
-    public class AppDbContext : BaseDbContext
+    public class AppDbContext : DbContext
     {
-        TempSeed temp;
-        public AppDbContext(DbContextOptions<BaseDbContext> options, TempSeed _temp) : base(options)
+        
+        //BaseDbContext _dbContext;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             Seed();
-            temp = _temp;
         }
 
         public void Seed()
         {
-            //SeedData.Seed(this);
-            temp.Seed();
+            SeedData.Seed(this);
+            
         }
 
         public DbSet<Center> Centers { get; set; }

@@ -1,24 +1,33 @@
 ﻿@model IEnumerable<LearningCoreAppWithValidation.ViewModels.CenterList>
 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr> <th>
-                    <label>Parent Center:</label>
-                </th>
-                <th>
-                    <label>Center Name</label>
-
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    <label>Center Type:</label>
-                </th>
+        <tr>
             <th>
-                Actions
+                <label>Parent Center</label>
             </th>
+            <th>
+                <label asp-for="Name"></label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CenterType)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -34,14 +43,13 @@
                 @Html.DisplayFor(modelItem => item.CenterType)
             </td>
             <td>
-                <button asp-action="Edit">Edit</button>
-                <button asp-action="Details">View Details</button>
-                <button asp-action="Delete">Delete</button>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
     </tbody>
 </table>
+</body>
+</html>

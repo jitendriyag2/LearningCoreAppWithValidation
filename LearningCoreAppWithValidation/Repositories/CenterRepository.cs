@@ -8,8 +8,8 @@ namespace LearningCoreAppWithValidation.Repositories
 {
     public class CenterRepository
     {
-        AppDbContext _dbContext;
-        public CenterRepository(AppDbContext dbContext)
+        BaseDbContext _dbContext;
+        public CenterRepository(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
         }

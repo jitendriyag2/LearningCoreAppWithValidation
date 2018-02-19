@@ -8,6 +8,5 @@ namespace LearningCoreAppWithValidation.Models
 {
     public class CenterType : ModelEntity
     {
-        public virtual IEnumerable<Center> Centers { get; set; }
     }
 }

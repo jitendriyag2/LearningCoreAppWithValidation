@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace LearningCoreAppWithValidation.DBEntitities
 {
@@ -10,6 +11,5 @@ namespace LearningCoreAppWithValidation.DBEntitities
         public virtual CenterType CenterType { get; set; }
         public int CenterTypeId { get; set; }
         public int CenterRefId { get; set; }
-        public virtual Center ParentCenter { get; set; }
     }
 }
